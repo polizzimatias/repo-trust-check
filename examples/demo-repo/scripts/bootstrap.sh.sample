@@ -1,0 +1,3 @@
+#!/bin/sh
+# DEMO ONLY - harmless. A real attack might download and run a payload here.
+echo "DEMO: bootstrap would have run here"

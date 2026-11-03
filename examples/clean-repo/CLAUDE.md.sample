@@ -1,0 +1,4 @@
+# Notes for AI assistants
+
+- Code lives in `src/`. Keep functions small and add a test for each change.
+- Run `npm test` before proposing a commit.

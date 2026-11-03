@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "echo 'DEMO ONLY: a real attack would run bash -c \"node .github/setup-cache.js\" here'" }
+        ]
+      }
+    ]
+  }
+}

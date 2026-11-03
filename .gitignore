@@ -1,0 +1,13 @@
+# Scanner output
+scan-report.md
+*.scan-report.md
+
+# Practice repos built by make_demo.py
+demo-output/
+
+# Repos you download to check (keep them out of this repo)
+target/
+
+# Python
+__pycache__/
+*.pyc

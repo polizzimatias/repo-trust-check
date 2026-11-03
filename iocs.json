@@ -1,0 +1,86 @@
+{
+  "_about": "Optional indicators of compromise used by scan_repo.py. Network indicators are stored defanged ([.] and hxxp) and refanged in memory at scan time. Every value below is copied from the source report; nothing is added.",
+  "_source": {
+    "title": "Beyond testmetest: Native Addon Camouflage and 42 Armed GitHub Repositories Reveal a Hidden npm Publisher",
+    "publisher": "JFrog Security Research",
+    "date": "2026-10-26",
+    "url": "https://research.jfrog.com/post/beyond-testmetest-42-hijacked-github-repos/"
+  },
+  "network": [
+    "43[.]228[.]157[.]68",
+    "aiarmor[.]website"
+  ],
+  "strings": [
+    "CementBeetleSteeple",
+    "msync-3f7a",
+    "net-health-checker",
+    "pkg-runtime",
+    "/tmp/.svc",
+    ".napi_cache",
+    "node-cache-utils/main/loader.js",
+    "AutoSyncComplete:",
+    "shellpanel execution smoke"
+  ],
+  "file_paths": [
+    ".github/init.js"
+  ],
+  "file_names": [
+    ".napi_cache"
+  ],
+  "native_addons": [
+    "addon.node",
+    "addon_win.node"
+  ],
+  "packages": [
+    "data-pipeline-testmetest",
+    "event-bus-lite-testmetest",
+    "event-emitter-testmetest",
+    "log-rotate-testmetest",
+    "log-sink-testmetest",
+    "net-codec-testmetest",
+    "npm-publish-testmetest",
+    "pixel-map-testmetest",
+    "retry-utils-testmetest",
+    "test-brotli-testmetest",
+    "test-brotli2-testmetest",
+    "@iobandamwer/cache-helper",
+    "@iobandamwer/native-helper",
+    "path-stream-utils-testmetest",
+    "@testsecuiitytestme/cache-helper"
+  ],
+  "sha256": {
+    "9d83919bfdb0e14018f1a6f2b8b6586de59b60dfdcfbdb5ae1a1556c23cc4793": "victim payload _p",
+    "3dc40fc55302664c07c9d9182ffd95910aeb366fcd417fbdad0a90cdeb8ea69e": "Bun bootstrap _b",
+    "8506042b383ab46545c27a402eb2dc973696a93af71181b175b1d87972843a43": "ci.js publisher",
+    "783a4ac906cc9b2eaf5cd13408ea95db6ce52a46d9af11aad1a5b167af69589f": "ci.js v3 publisher",
+    "a516dd7867af83f8be0cc3e926fdfd964097f0e7665596b05fe5234be7e2b5e9": "stable-scripts loader",
+    "ccfd769acc024edc409ef879198d2a2398beee60930f2b3f2771ded1e14e0c57": "stable-scripts stage",
+    "7ad216b3afd2f40a147c80733c7309fb3d3a7f52ee78149c8e51672cfb617d07": "stable-scripts publisher",
+    "e3cb383615fc70bce9b5bcd1c7a394132b50483daaf231a04ee90d4690962c73": "shellpanel mock",
+    "17614e98b613b17d0e1bb7125ab203715dd397661b897d8d18dbb77864c1839f": "shellpanel marker tool"
+  },
+  "sha256_prefixes": {
+    "36385dbe": "wrapper blob prefix (groups G1-G10)",
+    "0892d847": "wrapper blob prefix (groups G1-G10)",
+    "fc2a0699": "wrapper blob prefix (groups G1-G10)",
+    "069f5e22": "wrapper blob prefix (groups G1-G10)",
+    "49d08999": "wrapper blob prefix (groups G1-G10)",
+    "684cf1a1": "wrapper blob prefix (groups G1-G10)",
+    "01e9dc12": "wrapper blob prefix (groups G1-G10)",
+    "a03af3db": "wrapper blob prefix (groups G1-G10)",
+    "e086374a": "wrapper blob prefix (groups G1-G10)",
+    "5f367cc3": "wrapper blob prefix (groups G1-G10)"
+  },
+  "commit_markers_high": [
+    "shellpanel execution smoke",
+    "AutoSyncComplete:",
+    "msync-3f7a"
+  ],
+  "commit_markers_medium": [
+    "skip-checks:true"
+  ],
+  "branch_prefixes": [
+    "chore/ci-",
+    "deps/upd-"
+  ]
+}
