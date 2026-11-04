@@ -56,6 +56,9 @@ Type these two lines inside Claude Code, then restart it:
 /plugin install repo-trust-check@repo-trust-check
 ```
 
+If the first line fails with an SSH error, use the full link instead:
+`/plugin marketplace add https://github.com/polizzimatias/repo-trust-check.git`
+
 ### Or do it yourself: one line in a terminal
 
 macOS / Linux:
