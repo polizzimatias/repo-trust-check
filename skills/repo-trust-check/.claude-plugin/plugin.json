@@ -1,0 +1,11 @@
+{
+  "name": "repo-trust-check",
+  "version": "1.0.0",
+  "description": "Checks a GitHub/GitLab repo for booby traps (auto-run hooks, malicious install scripts, prompt injection) in a quarantine folder before your AI opens or installs it.",
+  "author": { "name": "Matias Polizzi", "url": "https://github.com/polizzimatias" },
+  "homepage": "https://github.com/polizzimatias/repo-trust-check",
+  "repository": "https://github.com/polizzimatias/repo-trust-check",
+  "license": "MIT",
+  "keywords": ["security", "supply-chain", "git", "clone", "beginner"],
+  "skills": ["./"]
+}

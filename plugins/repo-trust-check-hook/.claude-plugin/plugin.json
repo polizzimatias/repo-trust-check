@@ -1,0 +1,11 @@
+{
+  "name": "repo-trust-check-hook",
+  "version": "1.0.0",
+  "description": "Optional, stricter add-on: stops Claude from running a plain `git clone` / `gh repo clone` and points it at the repo-trust-check safety check instead.",
+  "author": { "name": "Matias Polizzi", "url": "https://github.com/polizzimatias" },
+  "homepage": "https://github.com/polizzimatias/repo-trust-check",
+  "repository": "https://github.com/polizzimatias/repo-trust-check",
+  "license": "MIT",
+  "keywords": ["security", "hook", "git", "clone"],
+  "dependencies": ["repo-trust-check"]
+}
