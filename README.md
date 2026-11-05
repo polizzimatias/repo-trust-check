@@ -29,8 +29,9 @@ downloaded**. If you already opened a repo, see
 
 ### Easiest: let your AI install it
 
-Copy this whole box and paste it into Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot or
-Windsurf:
+Copy this whole box and paste it into your AI tool. **Tested in Claude Code.** It's built to work
+with Codex, Cursor, Gemini CLI, GitHub Copilot and Windsurf too, but those haven't been tested yet,
+so please [open an issue](https://github.com/polizzimatias/repo-trust-check/issues) if it doesn't work for you:
 
 ```text
 Install the repo-trust-check safety skill from https://github.com/polizzimatias/repo-trust-check
@@ -77,7 +78,8 @@ You need `git` and Python 3. The skill uses nothing else.
 
 ### Which folder does my AI tool read?
 
-The copy-paste and one-line installs above cover all of these. Cursor, VS Code and Copilot read
+Only Claude Code has been tested so far. The other rows come from each tool's documentation and
+are untested. The copy-paste and one-line installs above cover all of these. Cursor, VS Code and Copilot read
 both folders, so they may list the skill twice. That is harmless.
 
 | AI tool | Reads skills from | Its own installer (optional) |
@@ -90,7 +92,7 @@ both folders, so they may list the skill twice. That is harmless.
 | Windsurf / Devin Desktop | `~/.agents/skills` (and `~/.claude/skills` if Claude config reading is on) | |
 
 `gh skill install polizzimatias/repo-trust-check repo-trust-check --agent <tool> --scope user`
-(GitHub CLI 2.90 or newer) also works for `claude-code`, `codex`, `cursor` and `gemini-cli`.
+(GitHub CLI 2.90 or newer) should also work for `claude-code`, `codex`, `cursor` and `gemini-cli` (untested).
 
 ### Optional for Claude Code: block plain `git clone` (stricter)
 
