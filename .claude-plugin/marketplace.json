@@ -1,0 +1,21 @@
+{
+  "name": "repo-trust-check",
+  "owner": { "name": "Matias Polizzi", "url": "https://github.com/polizzimatias" },
+  "metadata": {
+    "description": "Check a repo for booby traps before your AI coding tool opens or installs it."
+  },
+  "plugins": [
+    {
+      "name": "repo-trust-check",
+      "source": "./skills/repo-trust-check",
+      "description": "The safety skill: when you paste a repo link, your AI downloads it into a quarantine folder, scans it offline, and explains the verdict before anything runs.",
+      "category": "security"
+    },
+    {
+      "name": "repo-trust-check-hook",
+      "source": "./plugins/repo-trust-check-hook",
+      "description": "Optional and stricter: blocks plain `git clone` / `gh repo clone` commands so they must go through the safety check. Installs the skill too.",
+      "category": "security"
+    }
+  ]
+}

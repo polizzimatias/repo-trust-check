@@ -13,6 +13,102 @@ by itself.
 
 > This is not antivirus and it comes with no warranty. See [Limits](#limits).
 
+## For beginners: one-minute setup
+
+Install this once and your AI assistant checks every repo **before** it downloads, opens or
+installs it. After that you just paste a link as usual ("set up
+https://github.com/someone/cool-app for me"). The AI first downloads the repo into a separate
+folder (`~/repo-quarantine`), scans it without running anything, and tells you in plain words:
+**Looks clean**, **Review before opening** or **Do not open**. If the answer is "Do not open",
+it stops.
+
+**Important:** the check only works if it happens before the repo is opened. Start your AI from
+your home folder or your usual projects folder, **never from inside a folder you just
+downloaded**. If you already opened a repo, see
+[If you already opened a repo](#if-you-already-opened-a-repo-that-comes-back-do-not-open).
+
+### Easiest: let your AI install it
+
+Copy this whole box and paste it into Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot or
+Windsurf:
+
+```text
+Install the repo-trust-check safety skill from https://github.com/polizzimatias/repo-trust-check
+Do exactly this and nothing else:
+1. Download it without running anything:
+   git clone --depth 1 --no-recurse-submodules -c core.hooksPath=/dev/null https://github.com/polizzimatias/repo-trust-check ~/.repo-trust-check
+   (If ~/.repo-trust-check already exists, update it instead: git -C ~/.repo-trust-check pull)
+2. Copy the folder ~/.repo-trust-check/skills/repo-trust-check into ~/.claude/skills/ and into
+   ~/.agents/skills/ (create those folders if needed, replace an older copy). On Windows, ~ means
+   my user folder (C:\Users\<me>).
+3. Do not run any other file from it. Tell me when it is done and remind me to restart you.
+```
+
+Then close and reopen your AI tool. That's it. The first time the check runs, your AI may ask
+permission to use the skill or to run `check_repo.py`. Say yes.
+
+### Claude Code: install as a plugin (gets updates)
+
+Type these two lines inside Claude Code, then restart it:
+
+```text
+/plugin marketplace add polizzimatias/repo-trust-check
+/plugin install repo-trust-check@repo-trust-check
+```
+
+If the first line fails with an SSH error, use the full link instead:
+`/plugin marketplace add https://github.com/polizzimatias/repo-trust-check.git`
+
+### Or do it yourself: one line in a terminal
+
+macOS / Linux:
+
+```bash
+git clone --depth 1 -c core.hooksPath=/dev/null https://github.com/polizzimatias/repo-trust-check ~/.repo-trust-check && for d in ~/.claude/skills ~/.agents/skills; do mkdir -p "$d/repo-trust-check" && cp -R ~/.repo-trust-check/skills/repo-trust-check/. "$d/repo-trust-check/"; done
+```
+
+Windows (PowerShell):
+
+```powershell
+git clone --depth 1 https://github.com/polizzimatias/repo-trust-check "$HOME\.repo-trust-check"; foreach ($d in "$HOME\.claude\skills", "$HOME\.agents\skills") { New-Item -ItemType Directory -Force "$d\repo-trust-check" | Out-Null; Copy-Item -Recurse -Force "$HOME\.repo-trust-check\skills\repo-trust-check\*" "$d\repo-trust-check\" }
+```
+
+You need `git` and Python 3. The skill uses nothing else.
+
+### Which folder does my AI tool read?
+
+The copy-paste and one-line installs above cover all of these. Cursor, VS Code and Copilot read
+both folders, so they may list the skill twice. That is harmless.
+
+| AI tool | Reads skills from | Its own installer (optional) |
+|---|---|---|
+| Claude Code | `~/.claude/skills` or the plugin above | `/plugin install repo-trust-check@repo-trust-check` |
+| OpenAI Codex | `~/.agents/skills` | `$skill-installer install https://github.com/polizzimatias/repo-trust-check/tree/main/skills/repo-trust-check` |
+| Cursor | `~/.agents/skills`, `~/.cursor/skills`, `~/.claude/skills` | |
+| Gemini CLI | `~/.agents/skills`, `~/.gemini/skills` | `gemini skills install https://github.com/polizzimatias/repo-trust-check.git --path skills/repo-trust-check` |
+| GitHub Copilot (VS Code, CLI) | `~/.copilot/skills`, `~/.agents/skills`, `~/.claude/skills` | `gh skill install polizzimatias/repo-trust-check repo-trust-check --agent github-copilot --scope user` |
+| Windsurf / Devin Desktop | `~/.agents/skills` (and `~/.claude/skills` if Claude config reading is on) | |
+
+`gh skill install polizzimatias/repo-trust-check repo-trust-check --agent <tool> --scope user`
+(GitHub CLI 2.90 or newer) also works for `claude-code`, `codex`, `cursor` and `gemini-cli`.
+
+### Optional for Claude Code: block plain `git clone` (stricter)
+
+The skill relies on the AI noticing that you pasted a repo link. For an extra safety net, this
+add-on stops Claude from running `git clone`, `gh repo clone` or `degit` directly and sends it
+to the check instead:
+
+```text
+/plugin install repo-trust-check-hook@repo-trust-check
+```
+
+Good to know before you turn it on:
+- It is a reminder, not a wall. Code can still be downloaded in other ways.
+- It also blocks clones of your own repos. Turn it off with
+  `/plugin disable repo-trust-check-hook@repo-trust-check`, or start Claude with
+  `REPO_TRUST_CHECK_HOOK=off` for one session.
+- It needs `python3` on your PATH. Without it, the hook does nothing (Claude carries on).
+
 ## Why this exists
 
 Modern AI coding tools and editors read config files from the project folder
@@ -95,6 +191,8 @@ The report is printed and also saved as `scan-report.md` (change that with
 
 ### Or let Claude Code or Codex do steps 2 and 3
 
+Easiest: install the skill once ([For beginners](#for-beginners-one-minute-setup)) and just
+paste the repo link. Or, without installing anything:
 Open [PROMPT.md](PROMPT.md), start Claude Code or Codex **in `~/repo-check`
 (never inside `target`)**, and paste the prompt. It tells the agent to clone
 safely, run the scanner, treat everything in the repo as untrusted, and give
@@ -185,6 +283,11 @@ checking.
 | File | What it is |
 |---|---|
 | `scan_repo.py` | The scanner. Read-only, standard library only. |
+| `skills/repo-trust-check/` | The AI skill: `SKILL.md`, `check_repo.py` (safe download + scan) and copies of the scanner. Also a Claude Code plugin. |
+| `plugins/repo-trust-check-hook/` | Optional Claude Code add-on that blocks plain `git clone` (see above). |
+| `.claude-plugin/marketplace.json` | Lets Claude Code install both from this repo. |
+| `tools/sync_skill.py` | Copies `scan_repo.py` and `iocs.json` into the skill. Edit the root files, then run it. |
+| `tests/` | `python3 -m unittest discover -s tests`. Also checks the skill copies match. |
 | `iocs.json` | Optional known indicators from the JFrog report, with the source cited inside. |
 | `PROMPT.md` | Copy-paste prompt for Claude Code or Codex, plus a terminal-only version. |
 | `STEPS.md` | The five steps on one page, caveats, and the "already opened" checklist. |

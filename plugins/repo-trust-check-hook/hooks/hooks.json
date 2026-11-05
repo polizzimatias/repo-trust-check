@@ -1,0 +1,17 @@
+{
+  "description": "repo-trust-check: send git clone / gh repo clone through the safety check first",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/clone_guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
